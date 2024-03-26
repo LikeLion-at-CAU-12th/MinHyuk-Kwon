@@ -11,3 +11,5 @@
 
 ## 3주차 Session 과제 캡쳐본
 ![포스트맨 캡쳐](https://i.postimg.cc/kggBtRk8/image.png)
+## 3주차 챌린지 과제 캡쳐본
+![화면 캡쳐](https://i.postimg.cc/Y0ZYM4VV/image.png)
