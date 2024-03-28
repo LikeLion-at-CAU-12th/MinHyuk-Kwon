@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        저와 제 코드리뷰 짝을 소개합니다!
+    </title>
+</head>
+<body>
+    <h1> 저와 제 코드리뷰 짝을 소개합니다!</h1>
+
+    <h2> Me </h2>
+    	<div>
+    		<p>이름: {{ codeReviewer.0.name }}</p>
+            <p>나이: {{ codeReviewer.0.age }}</p>
+            <p>전공: {{ codeReviewer.0.major }}</p>
+            <p>깃허브 링크: <a href="https://www.github.com/{{ codeReviewer.0.gitHub | slice:"1:"}}">{{ codeReviewer.0.gitHub }}</a> </p>
+    	</div>
+
+    <h2> My Code Reviewer </h2>
+    	<div>
+    		<p>이름: {{ codeReviewer.1.name }}</p>
+            <p>나이: {{ codeReviewer.1.age }}</p>
+            <p>전공: {{ codeReviewer.1.major }}</p>
+            <p>깃허브 링크: <a href="https://www.github.com/{{ codeReviewer.1.gitHub | slice:"1:"}}">{{ codeReviewer.1.gitHub }}</a> </p>
+    	</div>
+</body>
