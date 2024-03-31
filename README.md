@@ -8,8 +8,22 @@
 <span style="background-color:#FFE6E6"> tmi : 3월13일자 "침착맨 vs 침팬지"편 레전드니까 꼭 보세요. </span>
 
 멋사에는 좋은 사람들 뿐인 것 같아요. 저도 여러분들에게 좋은 사람으로 기억될 수 있도록 잘 해보겠습니다 하하. 😄
+<details>
+<summary>3주차</summary>
+<div markdown="1">
 
-## 3주차 Session 과제 캡쳐본
+## 3주차 스탠다드 과제 캡쳐본
 ![포스트맨 캡쳐](https://i.postimg.cc/kggBtRk8/image.png)
 ## 3주차 챌린지 과제 캡쳐본
 ![화면 캡쳐](https://i.postimg.cc/Y0ZYM4VV/image.png)
+</div>
+</details>
+
+<details>
+<summary>4주차</summary>
+<div markdown="1">
+
+## 4주차 스탠다드 과제 캡쳐본
+
+</div>
+</details>
