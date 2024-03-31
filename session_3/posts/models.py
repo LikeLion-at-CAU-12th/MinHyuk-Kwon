@@ -29,3 +29,19 @@ class Post(BaseModel):
     content = models.TextField(verbose_name='내용')
     writer = models.CharField(verbose_name='작성자', max_length=10)
     category = models.CharField(choices=CHOICES, max_length=20)
+
+'''
+id PK int
+comment varchar(100)
+post int FK >- Post.id
+writer varchar(20) FK >- User.id -> 이 부분은 보류
+'''
+class Comment(BaseModel):
+    id = models.AutoField(primary_key=True)
+    comment = models.CharField(verbose_name='내용', max_length=100)
+    post = models.ForeignKey("Post", related_name="post", on_delete=models.CASCADE)
+    writer = models.ForeignKey("accounts.User", related_name="writer", on_delete=models.CASCADE)
+'''
+python manage.py makemigrations
+python manage.py migrate
+'''
