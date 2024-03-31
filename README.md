@@ -18,12 +18,12 @@
 ![화면 캡쳐](https://i.postimg.cc/Y0ZYM4VV/image.png)
 </div>
 </details>
-
 <details>
 <summary>4주차</summary>
 <div markdown="1">
 
 ## 4주차 스탠다드 과제 캡쳐본
-
+![ERD](https://i.postimg.cc/02Rs0p7Q/image.png) 
+![admin페이지](https://i.postimg.cc/zv1qvWjV/image.png)
 </div>
 </details>
