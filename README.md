@@ -12,4 +12,28 @@
 ## 3주차 Session 과제 캡쳐본
 ![포스트맨 캡쳐](https://i.postimg.cc/kggBtRk8/image.png)
 ## 3주차 챌린지 과제 캡쳐본
+<<<<<<< Updated upstream
 ![화면 캡쳐](https://i.postimg.cc/Y0ZYM4VV/image.png)
+=======
+![화면 캡쳐](https://i.postimg.cc/Y0ZYM4VV/image.png)
+</div>
+</details>
+<details>
+<summary>4주차</summary>
+<div markdown="1">
+
+## 4주차 스탠다드 과제 캡쳐본
+![ERD](https://i.postimg.cc/02Rs0p7Q/image.png) 
+![admin페이지](https://i.postimg.cc/zv1qvWjV/image.png)
+</div>
+</details>
+
+## 4주차 챌린지 과제 캡쳐본
+![ERD](https://i.postimg.cc/KvvZSLbp/image.png)
+
+- HashTag는 PK인 id필드, hasytag의 내용인 cotent필드를 가집니다. 그리고 나중에 hasytag가 사용된 post들을 모아볼 수 있도록 post의 id를 외래키로 가졌습니다.
+- 이때 제 의도는 HashTag의 post필드가 여러 개의 Post.id를 가질 수 있다라는 것을 표현하기 위해 그림 상에 '>-------'로 생긴 선으로 연결했는데 의도가 제대로 표현된 것인지는 잘 모르겠습니다...
+- 마찬가지로 하나의 Post가 여러개의 HashTag를 가질 수 있다는 의미로 Post.hashtag와 HashTag.id를 '-------<'선으로 표현했습니다.
+</div>
+</details>
+>>>>>>> Stashed changes
