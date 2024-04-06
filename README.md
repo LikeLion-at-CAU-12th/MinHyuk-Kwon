@@ -27,3 +27,10 @@
 ![admin페이지](https://i.postimg.cc/zv1qvWjV/image.png)
 </div>
 </details>
+
+## 5주차 스탠다드 과제 캡쳐본
+### 1. 특정 게시글에 포함된 모든 comment 읽어오는 API 만들기
+#### post/post_id/comment/
+![과제1](https://i.postimg.cc/Pf70rVFd/2024-04-06-9-19-37.png)
+#### post/week/
+![과제2](https://i.postimg.cc/vBHCDJsZ/2024-04-06-9-19-17.png)
