@@ -40,5 +40,5 @@
 ### 1. ImageField를 이용하여 이미지를 포함한 post를 생성하는 API 만들기
 #### 포스트맨
 ![챌린지1](https://i.postimg.cc/cLVDtX94/image.png)
-#### 이미지가 저장된 모습
-![챌린지2](https://i.postimg.cc/1tj4yCrs/image.png)
+#### media 폴더에 이미지가 저장된 모습
+![챌린지2](https://i.postimg.cc/DfqsFFbz/image.png)
