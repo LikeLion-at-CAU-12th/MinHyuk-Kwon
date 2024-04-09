@@ -13,6 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Media
+MEDIA_ROOT = BASE_DIR / 'media' # 사용자가 업로든한 파일들이 실제로 저장되는 경로
+MEDIA_URL = '/media' # 미디어를 처리하는 URL
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
