@@ -1,9 +1,205 @@
 from django.shortcuts import render
 from django.http import JsonResponse # 추가 
 from django.shortcuts import get_object_or_404 # 추가
+from django.shortcuts import get_list_or_404
 from django.views.decorators.http import require_http_methods
 from posts.models import *
 #from .models import CodeReviewer  3주차 챌린지 과제용
+import json
+from datetime import datetime, timedelta
+
+@require_http_methods(["POST", "GET"])
+def post_list(request):
+
+	if request.method == "POST":
+		body = json.loads(request.body.decode("utf-8"))
+
+		# 새로운 데이터를 DB에 생성
+		new_post = Post.objects.create(
+			writer = body['writer'],
+			title = body['title'],
+			content = body['content'],
+			category = body['category']
+		)
+
+		# json으로 response 생성 (위에서 새로 생성된 데이터에 대한 정보를 담은 json)
+		new_post_json = {
+			"id" : new_post.id,
+			"writer" : new_post.writer,
+			"title" : new_post.title,
+			"content" : new_post.content,
+			"category" : new_post.category
+		}
+
+		# response 반환
+		return JsonResponse({
+			"status" : 200,
+			"message" : "게시글 작성 성공",
+			"data" : new_post_json
+		})
+
+	elif request.method == "GET":
+		post_all = Post.objects.all()
+
+		post_json_all = []
+
+		for post in post_all:
+			post_json = {
+				"id" : post.id,
+				"writer" : post.writer,
+				"title" : post.title,
+				"content" : post.content,
+				"category" : post.category
+			}
+			post_json_all.append(post_json)
+		
+		return JsonResponse({
+			"status" : 200,
+			"message" : "게시글 목록 조회 성공",
+			"data" : post_json_all
+		})
+
+@require_http_methods(["GET", "PATCH", "DELETE"])
+def post_detail(request, id):
+
+	if request.method == "GET":
+		post = get_object_or_404(Post, pk=id)
+
+		post_json = {
+			"id" : post.id,
+			"writer" : post.writer,
+			"title" : post.title,
+			"content" : post.content,
+			"category" : post.category
+		}
+
+		return JsonResponse({
+			"status" : 200,
+			"message" : "개별 조회 성공",
+			"data" : post_json
+		})
+
+	elif request.method == "PATCH":
+
+		body = json.loads(request.body.decode('utf-8'))
+
+		update_post = get_object_or_404(Post, pk = id)
+
+		update_post.title = body["title"]
+		update_post.content = body["content"]
+		update_post.category = body["category"]
+
+		update_post.save()
+
+		update_post_json = {
+			"id" : update_post.id,
+			"writer" : update_post.writer,
+			"title" : update_post.title,
+			"content" : update_post.content,
+			"category" : update_post.category
+		}
+
+		return JsonResponse({
+			"state" : 200,
+			"message" : "게시글 수정 성공",
+			"data" : update_post_json
+		})
+	elif request.method == "DELETE":
+		delete_post = get_object_or_404(Post, pk = id)
+		delete_post.delete()
+
+		return JsonResponse({
+			"status" : 200,
+			"message" : "게시글 삭제 성공",
+			"data" : None
+		})
+
+@require_http_methods(["GET"])
+def get_post_detail(request, id):
+	post = get_object_or_404(Post, id=id)
+	post_detail_json = {
+		"id" : post.id,
+		"title" : post.title,
+		"content" : post.content,
+		"writer" : post.writer,
+		"category" : post.category
+	}
+
+	return JsonResponse({
+		"status" : 200,
+		"message" : "게시글 조회 성공",
+		"data" : post_detail_json
+	})
+
+# 5주차 과제1
+@require_http_methods(["POST","GET"])
+def comment_list(request, post_id):
+	if request.method == "POST":
+		body = json.loads(request.body.decode("utf-8"))
+
+		new_comment = Comment.objects.create(
+			post_id = post_id,
+			writer = body['writer'],
+			comment = body['comment']
+		)
+
+		new_comment_json = {
+			"post_id" : new_comment.post_id,
+			"comment" : new_comment.comment,
+			"writer" : new_comment.writer
+		}
+
+		return JsonResponse({
+			"status" : 200,
+			"message" : "새로운 댓글 작성 완료",
+			"data" : new_comment_json
+		})
+
+	elif request.method == "GET":
+		# comment_all = Comment.objects.filter(post_id = post_id)
+		comment_all = get_list_or_404(Comment, post_id = post_id)
+		comment_json_all = []
+
+		for comment in comment_all:
+			comment_json = {
+				"id" : comment.id,
+				"comment" : comment.comment,
+				"writer" : comment.writer
+			}
+			comment_json_all.append(comment_json)
+
+		return JsonResponse({
+			"status" : 200,
+			"message" : f"{post_id}번 게시글의 모든 댓글",
+			"data" : comment_json_all
+		})
+
+# 5주차 과제2
+@require_http_methods(["GET"])
+def post_made_week(request):
+	post_list = get_list_or_404(Post.objects.order_by('created_at'), created_at__range = [datetime.now() - timedelta(days=7), datetime.now()])
+	#post_list = Post.objects.filter(created_at__range = [date.today() - timedelta(days=7), date.today()])
+	#post_list = Post.objects.filter(created_at__range = [datetime.now() - timedelta(days=7), datetime.now()])
+
+	post_json_list = []
+	for post in post_list:
+		post_json = {
+			"id" : post.id,
+			"writer" : post.writer,
+			"title" : post.title,
+			"content" : post.content,
+			"category" : post.category,
+			"created_at" : post.created_at
+		}
+		post_json_list.append(post_json)
+	
+	return JsonResponse({
+		"state" : 200,
+		"message" : "최근 일주일간 생성된 포스트 조회 성공",
+		"data" : post_json_list,
+		"now" : datetime.now()
+	})
+
 
 # Create your views here.
 def hello_world(request):
@@ -33,22 +229,7 @@ def introduction(request):
 	]
 })
 
-@require_http_methods(["GET"])
-def get_post_detail(request, id):
-	post = get_object_or_404(Post, pk=id)
-	post_detail_json = {
-		"id" : post.id,
-		"title" : post.title,
-		"content" : post.content,
-		"writer" : post.writer,
-		"category" : post.category
-	}
 
-	return JsonResponse({
-		"status" : 200,
-		"message" : "게시글 조회 성공",
-		"data" : post_detail_json
-	})
 
 # 3주차 챌린지 과제
 # def codeReview(request):
