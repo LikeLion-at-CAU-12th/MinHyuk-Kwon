@@ -13,10 +13,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Media
+MEDIA_ROOT = BASE_DIR / 'media' # 사용자가 업로든한 파일들이 실제로 저장되는 경로
+MEDIA_URL = '/media/' # 미디어를 처리하는 URL
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] # 배포 실습을 위해 모든 호스트에 대해 접속을 허용함
 
 secret_file = os.path.join(BASE_DIR, 'secrets.json') 
 
@@ -51,7 +55,7 @@ PROJECT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    "corsheaders",
 ]
 
 
@@ -67,6 +71,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [ 
+    "http://localhost:3000", # 리액트가 사용하는 포트 번호 (프론트엔드와의 협업)
+    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'config.urls'
