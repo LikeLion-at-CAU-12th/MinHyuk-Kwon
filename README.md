@@ -28,6 +28,12 @@
 </div>
 </details>
 
+
+
+<details>
+<summary>5주차</summary>
+<div markdown="1">
+
 ## 5주차 스탠다드 과제 캡쳐본
 ### 1. 특정 게시글에 포함된 모든 comment 읽어오는 API 만들기
 #### post/post_id/comment/
@@ -35,3 +41,12 @@
 ### 2. 최근 일주일간 생성된 게시글 생성일자 순으로 가져오는 API 만들기
 #### post/week/
 ![과제2](https://i.postimg.cc/vBHCDJsZ/2024-04-06-9-19-17.png)
+
+</div>
+</details>
+
+
+
+## 6주차 스탠다드 과제 캡쳐본
+
+![포스트맨](https://i.postimg.cc/ZKFMFYB9/2024-04-13-10-22-13.png)
