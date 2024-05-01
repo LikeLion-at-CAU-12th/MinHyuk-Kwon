@@ -42,6 +42,7 @@
 #### post/week/
 ![과제2](https://i.postimg.cc/vBHCDJsZ/2024-04-06-9-19-17.png)
 
+
 </div>
 </details>
 
@@ -50,3 +51,10 @@
 ## 6주차 스탠다드 과제 캡쳐본
 
 ![포스트맨](https://i.postimg.cc/ZKFMFYB9/2024-04-13-10-22-13.png)
+=======
+## 5주차 챌린지 과제 캡쳐본
+### 1. ImageField를 이용하여 이미지를 포함한 post를 생성하는 API 만들기
+#### 포스트맨
+![챌린지1](https://i.postimg.cc/cLVDtX94/image.png)
+#### media 폴더에 이미지가 저장된 모습
+![챌린지2](https://i.postimg.cc/DfqsFFbz/image.png)

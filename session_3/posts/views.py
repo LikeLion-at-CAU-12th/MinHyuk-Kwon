@@ -49,7 +49,8 @@ def post_list(request):
 				"writer" : post.writer,
 				"title" : post.title,
 				"content" : post.content,
-				"category" : post.category
+				"category" : post.category,
+				"image" : post.image != ''
 			}
 			post_json_all.append(post_json)
 		
@@ -178,7 +179,7 @@ def comment_list(request, post_id):
 @require_http_methods(["GET"])
 def post_made_week(request):
 	post_list = get_list_or_404(Post.objects.order_by('created_at'), created_at__range = [datetime.now() - timedelta(days=7), datetime.now()])
-	#post_list = Post.objects.filter(created_at__range = [date.today() - timedelta(days=7), date.today()])
+	#post_list = Post.objects.filter(created_at__range = [datetime.date(2024,4,4), datetime.date(2024,4,10)])
 	#post_list = Post.objects.filter(created_at__range = [datetime.now() - timedelta(days=7), datetime.now()])
 
 	post_json_list = []
