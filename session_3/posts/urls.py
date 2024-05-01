@@ -1,5 +1,7 @@
 from django.urls import path
 from posts.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # path('', hello_world, name = 'hello_world'),
@@ -10,4 +12,4 @@ urlpatterns = [
     path('<int:post_id>/comment/', comment_list, name="comment_list"),
     path('week/', post_made_week, name="post_made_week")
     # path('page/', codeReview, name='codeReview'),
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
