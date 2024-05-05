@@ -45,3 +45,6 @@ class Comment(BaseModel):
 python manage.py makemigrations
 python manage.py migrate
 '''
+
+
+

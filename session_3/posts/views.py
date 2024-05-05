@@ -242,3 +242,45 @@ def introduction(request):
 # 		codeReviewer = CodeReviewer.objects.filter()
 # 		# return render 매개변수에 모델 추가하기
 # 		return render(request, 'challenge.html', {'codeReviewer': codeReviewer})
+
+
+# 7th session
+# 위에서 작성한 긴 api를 class base view로 간결하게 작성함
+
+from .serializers import PostSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
+
+class PostList(APIView):
+    def post(self, request, format=None):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save();
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+    def get(self, request, format=None):
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many = True)
+        return Response(serializer.data)
+	
+class PostDetail(APIView):
+	def get(self, request, id):
+		post=  get_object_or_404(Post,id=id)
+		serializer = PostSerializer(post)
+		return Response(serializer.data)
+	
+	def put(self, request, id):
+		post = get_object_or_404(Post,id=id)
+		serializer = PostSerializer(post, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+	def delete(self, request, id):
+		post = get_object_or_404(Post, id=id)
+		post.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
