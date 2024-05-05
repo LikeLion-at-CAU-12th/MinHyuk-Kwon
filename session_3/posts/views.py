@@ -284,3 +284,17 @@ class PostDetail(APIView):
 		post = get_object_or_404(Post, id=id)
 		post.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CommentList(APIView):
+	def post(self, request, id):
+		serializer = CommentSerializer(data = request.data)
+		if serializer.is_valid():
+			serializer.save(post_id = id)
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+	
+	# 특정 게시글의 모든 댓글 가져오기
+	def get(self, request, id):
+		comments = get_list_or_404(Comment, post_id = id)
+		serializer = CommentSerializer(comments, many = True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
