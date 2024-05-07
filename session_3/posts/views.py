@@ -248,6 +248,7 @@ def introduction(request):
 # 위에서 작성한 긴 api를 class base view로 간결하게 작성함
 
 from .serializers import PostSerializer
+from .serializers import CommentSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
