@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Post
 from .models import Comment
+from django.core.exceptions import ValidationError 
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -17,7 +18,20 @@ class PostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        #fields = "__all__"
-        exclude = ['post']
-
-        
+        fields = "__all__"
+        # exclude = ['post']
+    
+    # def validat_post(self, value):
+    #     return value
+		
+    # def validate(self, data):
+    #     print('hi')
+    #     if data['title'] == '':
+    #         return ValidationError('required title field')
+    #     elif data['writer'] == '':
+    #         return ValidationError('required writer field')
+    #     return data
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+        # post 필드의 유효성 검사 함수를 제거합니다.
+            self.fields['post'].validators = []
