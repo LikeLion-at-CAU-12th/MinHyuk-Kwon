@@ -4,7 +4,7 @@
 
 안녕하세요 12기 백엔드 _권민혁_ 입니다.<br>
 경제학부 재학중이고, 19학번 25살 입니다.<br>
-농구, *침착맨*, 커피 좋아합니다. <br>
+*침착맨* 좋아합니다. <br>
 <span style="background-color:#FFE6E6"> tmi : 3월13일자 "침착맨 vs 침팬지"편 레전드니까 꼭 보세요. </span>
 
 멋사에는 좋은 사람들 뿐인 것 같아요. 저도 여러분들에게 좋은 사람으로 기억될 수 있도록 잘 해보겠습니다 하하. 😄
@@ -28,6 +28,9 @@
 </div>
 </details>
 
+<details>
+<summary>5주차</summary>
+<div markdown="1">
 ## 5주차 스탠다드 과제 캡쳐본
 
 ![포스트맨](https://i.postimg.cc/ZKFMFYB9/2024-04-13-10-22-13.png)
@@ -40,3 +43,9 @@
 ![get](https://i.postimg.cc/rsFxFncs/image.png)
 ### 2. post로 댓글을 작성한 뒤에 4번 post에 댓글이 생긴 모습
 ![post](https://i.postimg.cc/660hJRwT/image.png)
+
+## 7주차 챌린지 과제 캡쳐본
+### 1. GenericAPIView로 post api 작성
+![1번](https://i.postimg.cc/J4MnK1YV/image.png)
+### 2. 1에서 작성한 api swagger에 적용 (+겸사 겸사 comment 관련 apieh GenericAPIView로 구현)
+![2번](https://i.postimg.cc/T20Fg2Zg/image.png)
