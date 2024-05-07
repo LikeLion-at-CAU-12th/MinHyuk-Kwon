@@ -47,5 +47,5 @@
 ## 7주차 챌린지 과제 캡쳐본
 ### 1. GenericAPIView로 post api 작성
 ![1번](https://i.postimg.cc/J4MnK1YV/image.png)
-### 2. 1에서 작성한 api swagger에 적용 (+겸사 겸사 comment 관련 apieh GenericAPIView로 구현)
+### 2. 1에서 작성한 api swagger에 적용 (+겸사 겸사 comment 관련 GenericAPIView로 구현)
 ![2번](https://i.postimg.cc/T20Fg2Zg/image.png)
