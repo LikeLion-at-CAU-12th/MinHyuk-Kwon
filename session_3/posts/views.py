@@ -288,9 +288,11 @@ class PostDetail(APIView):
 
 class CommentList(APIView):
 	def post(self, request, id):
-		serializer = CommentSerializer(data = request.data)
+		data = request.data
+		data['post'] = id
+		serializer = CommentSerializer(data = data)
 		if serializer.is_valid():
-			serializer.save(post_id = id)
+			serializer.save()
 			return Response(serializer.data, status=status.HTTP_200_OK)
 		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 	

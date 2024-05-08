@@ -14,6 +14,6 @@ urlpatterns = [
     # path('page/', codeReview, name='codeReview'),
 
     path('',PostList.as_view()),
-    path('<int:id>/',PostDetail.as_view())
+    path('<int:id>/',PostDetail.as_view()),
     path('<int:id>/comment/',CommentList.as_view())
 ]
