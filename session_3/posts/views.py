@@ -252,7 +252,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
-from accounts.permissions import *
+from config.permissions import *
 
 class PostList(APIView):
 	# 인가 추가!
