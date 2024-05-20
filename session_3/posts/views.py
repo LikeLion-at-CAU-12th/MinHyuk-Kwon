@@ -252,10 +252,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from config.permissions import *
 
 class PostList(APIView):
+	# 인가 추가!
+    permission_classes = [KeyPermission]
+
     def post(self, request, format=None):
-        serializer = PostSerializer(data=request.data)
+        data = request.data
+        data['user'] = request.user.id
+        serializer = PostSerializer(data=data)
         if serializer.is_valid():
             serializer.save();
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -269,7 +275,7 @@ class PostList(APIView):
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 class PostDetail(APIView):
 	# 인가 추가!
-	permission_classes = [IsAuthenticatedOrReadOnly]
+	permission_classes = [IsAuthorOrReadOnly]
 
 	def get(self, request, id):
 		post=  get_object_or_404(Post,id=id)
@@ -286,5 +292,6 @@ class PostDetail(APIView):
 
 	def delete(self, request, id):
 		post = get_object_or_404(Post, id=id)
+		self.check_object_permissions(self.request, post)
 		post.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
