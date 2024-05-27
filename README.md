@@ -32,7 +32,6 @@
 <details>
 <summary>5주차</summary>
 <div markdown="1">
-
 ## 5주차 스탠다드 과제 캡쳐본
 ### 1. 특정 게시글에 포함된 모든 comment 읽어오는 API 만들기
 #### post/post_id/comment/

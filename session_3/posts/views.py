@@ -359,3 +359,19 @@ class CommentList(generics.ListCreateAPIView):
 		self.check_object_permissions(self.request, post)
 		post.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CommentList(APIView):
+	def post(self, request, id):
+		data = request.data
+		data['post'] = id
+		serializer = CommentSerializer(data = data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+	
+	# 특정 게시글의 모든 댓글 가져오기
+	def get(self, request, id):
+		comments = get_list_or_404(Comment, post_id = id)
+		serializer = CommentSerializer(comments, many = True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
