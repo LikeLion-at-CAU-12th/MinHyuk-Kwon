@@ -253,10 +253,36 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from rest_framework import generics
+
+# class PostList(APIView):
+#     def post(self, request, format=None):
+#         serializer = PostSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save();
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+#     def get(self, request, format=None):
+#         posts = Post.objects.all()
+#         serializer = PostSerializer(posts, many = True)
+#         return Response(serializer.data)
+	
+# class PostDetail(APIView):
+# 	def get(self, request, id):
+# 		post=  get_object_or_404(Post,id=id)
+# 		serializer = PostSerializer(post)
+# 		return Response(serializer.data)
+from config.permissions import *
 
 class PostList(APIView):
+	# 인가 추가!
+    permission_classes = [KeyPermission]
+
     def post(self, request, format=None):
-        serializer = PostSerializer(data=request.data)
+        data = request.data
+        data['user'] = request.user.id
+        serializer = PostSerializer(data=data)
         if serializer.is_valid():
             serializer.save();
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -266,23 +292,71 @@ class PostList(APIView):
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many = True)
         return Response(serializer.data)
-	
+
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 class PostDetail(APIView):
+	# 인가 추가!
+	permission_classes = [IsAuthorOrReadOnly]
+
 	def get(self, request, id):
 		post=  get_object_or_404(Post,id=id)
 		serializer = PostSerializer(post)
 		return Response(serializer.data)
 	
-	def put(self, request, id):
-		post = get_object_or_404(Post,id=id)
-		serializer = PostSerializer(post, data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_200_OK)
-		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+# 	def put(self, request, id):
+# 		post = get_object_or_404(Post,id=id)
+# 		serializer = PostSerializer(post, data=request.data)
+# 		if serializer.is_valid():
+# 			serializer.save()
+# 			return Response(serializer.data, status=status.HTTP_200_OK)
+# 		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
+# 	def delete(self, request, id):
+# 		post = get_object_or_404(Post, id=id)
+# 		post.delete()
+# 		return Response(status=status.HTTP_204_NO_CONTENT)
+class PostList(generics.ListCreateAPIView):
+	queryset = Post.objects.all()
+	serializer_class = PostSerializer
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Post.objects.all()
+	serializer_class = PostSerializer
+	lookup_field = 'id'
+
+class CommentList(generics.ListCreateAPIView):
+	queryset = Comment.objects.all()
+	serializer_class = CommentSerializer
+	lookup_field = 'post_id'
+
+	# perform_create는 serializer를 인자로 받아 serializer.save()를 실행하는 함수!
+	# def perform_create(self, serializer):
+	# 	serializer.save(post_id = self.kwargs.get('id'))
+	def create(self, request, *args, **kwargs):
+		request_data = request.data.copy()  # 요청 데이터 복사
+		request_data['post'] = kwargs.get('id')  # 'post_id' 값을 추가
+		serializer = self.get_serializer(data=request_data)
+		serializer.is_valid(raise_exception=True)
+		self.perform_create(serializer)
+		headers = self.get_success_headers(serializer.data)
+		return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+### CBV : APIVIEW
+# class CommentList(APIView):
+# 	def post(self, request, id):
+# 		serializer = CommentSerializer(data = request.data)
+# 		if serializer.is_valid():
+# 			serializer.save(post_id = id)
+# 			return Response(serializer.data, status=status.HTTP_200_OK)
+# 		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+	
+# 	# 특정 게시글의 모든 댓글 가져오기
+# 	def get(self, request, id):
+# 		comments = get_list_or_404(Comment, post_id = id)
+# 		serializer = CommentSerializer(comments, many = True)
+# 		return Response(serializer.data, status=status.HTTP_200_OK)
 	def delete(self, request, id):
 		post = get_object_or_404(Post, id=id)
+		self.check_object_permissions(self.request, post)
 		post.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
