@@ -253,7 +253,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
-<<<<<<< HEAD
 from rest_framework import generics
 
 # class PostList(APIView):
@@ -274,7 +273,6 @@ from rest_framework import generics
 # 		post=  get_object_or_404(Post,id=id)
 # 		serializer = PostSerializer(post)
 # 		return Response(serializer.data)
-=======
 from config.permissions import *
 
 class PostList(APIView):
@@ -304,7 +302,6 @@ class PostDetail(APIView):
 		post=  get_object_or_404(Post,id=id)
 		serializer = PostSerializer(post)
 		return Response(serializer.data)
->>>>>>> main
 	
 # 	def put(self, request, id):
 # 		post = get_object_or_404(Post,id=id)
