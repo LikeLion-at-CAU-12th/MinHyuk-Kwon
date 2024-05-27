@@ -31,14 +31,33 @@
 
 <details>
 <summary>5주차</summary>
-<<<<<<< HEAD
 <div markdown="1">
+
 ## 5주차 스탠다드 과제 캡쳐본
+### 1. 특정 게시글에 포함된 모든 comment 읽어오는 API 만들기
+#### post/post_id/comment/
+![과제1](https://i.postimg.cc/Pf70rVFd/2024-04-06-9-19-37.png)
+### 2. 최근 일주일간 생성된 게시글 생성일자 순으로 가져오는 API 만들기
+#### post/week/
+![과제2](https://i.postimg.cc/vBHCDJsZ/2024-04-06-9-19-17.png)
+
+</div>
+</details>
+
+<details>
+<summary>6주차</summary>
+<div markdown="1">
+
+## 6주차 스탠다드 과제 캡쳐본
 
 ![포스트맨](https://i.postimg.cc/ZKFMFYB9/2024-04-13-10-22-13.png)
 
 </div>
 </details>
+
+<details>
+<summary>7주차</summary>
+<div markdown="1">
 
 ## 7주차 스탠다드 과제 캡쳐본
 ### 1. 4번 post에 댓글이 없는 모습
@@ -51,22 +70,14 @@
 ![1번](https://i.postimg.cc/J4MnK1YV/image.png)
 ### 2. 1에서 작성한 api swagger에 적용 (+겸사 겸사 comment 관련 GenericAPIView로 구현)
 ![2번](https://i.postimg.cc/T20Fg2Zg/image.png)
-=======
 
-## 5주차 스탠다드 과제 캡쳐본
-### 1. 특정 게시글에 포함된 모든 comment 읽어오는 API 만들기
-#### post/post_id/comment/
-![과제1](https://i.postimg.cc/Pf70rVFd/2024-04-06-9-19-37.png)
-### 2. 최근 일주일간 생성된 게시글 생성일자 순으로 가져오는 API 만들기
-#### post/week/
-![과제2](https://i.postimg.cc/vBHCDJsZ/2024-04-06-9-19-17.png)
 </div>
 </details>
 
+## 8주차 스탠다드 과제 캡쳐본
 ### 1-1. key가 올바르지 않을 때
 ![과제1-1](https://i.postimg.cc/zfgPFHqR/image.png)
 ### 1-2. key가 올바를 때
 ![과제1-2](https://i.postimg.cc/RF1sjr6S/image.png)
 ### 2. 작성자가 아닌 사람이 삭제를 할 경우
 ![과제2-1](https://i.postimg.cc/SNnL9FSn/image.png)
->>>>>>> main
