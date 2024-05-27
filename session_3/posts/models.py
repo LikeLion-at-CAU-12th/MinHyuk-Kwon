@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import User
 
 # Create your models here.
 
@@ -23,7 +24,8 @@ class Post(BaseModel):
         ('STUDY', '공부'),
         ('ETC', '기타')
     )
-    
+    #user 외래키로 추가
+    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE, db_column="user")
     id = models.AutoField(primary_key=True)
     title = models.CharField(verbose_name='제목', max_length=20)
     content = models.TextField(verbose_name='내용')

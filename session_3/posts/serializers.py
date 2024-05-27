@@ -35,3 +35,4 @@ class CommentSerializer(serializers.ModelSerializer):
             super().__init__(*args, **kwargs)
         # post 필드의 유효성 검사 함수를 제거합니다.
             self.fields['post'].validators = []
+        # # 수정 불가능 옵션으로 필드를 가져올 수 있음

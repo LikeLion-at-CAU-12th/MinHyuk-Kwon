@@ -253,6 +253,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+<<<<<<< HEAD
 from rest_framework import generics
 
 # class PostList(APIView):
@@ -273,6 +274,37 @@ from rest_framework import generics
 # 		post=  get_object_or_404(Post,id=id)
 # 		serializer = PostSerializer(post)
 # 		return Response(serializer.data)
+=======
+from config.permissions import *
+
+class PostList(APIView):
+	# 인가 추가!
+    permission_classes = [KeyPermission]
+
+    def post(self, request, format=None):
+        data = request.data
+        data['user'] = request.user.id
+        serializer = PostSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save();
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+    def get(self, request, format=None):
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many = True)
+        return Response(serializer.data)
+
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+class PostDetail(APIView):
+	# 인가 추가!
+	permission_classes = [IsAuthorOrReadOnly]
+
+	def get(self, request, id):
+		post=  get_object_or_404(Post,id=id)
+		serializer = PostSerializer(post)
+		return Response(serializer.data)
+>>>>>>> main
 	
 # 	def put(self, request, id):
 # 		post = get_object_or_404(Post,id=id)
@@ -325,3 +357,8 @@ class CommentList(generics.ListCreateAPIView):
 # 		comments = get_list_or_404(Comment, post_id = id)
 # 		serializer = CommentSerializer(comments, many = True)
 # 		return Response(serializer.data, status=status.HTTP_200_OK)
+	def delete(self, request, id):
+		post = get_object_or_404(Post, id=id)
+		self.check_object_permissions(self.request, post)
+		post.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
