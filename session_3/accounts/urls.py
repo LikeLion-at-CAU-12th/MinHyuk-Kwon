@@ -14,5 +14,8 @@ urlpatterns = [
     #토큰
     path("token/", TokenObtainPairView.as_view()),
     path("token/refresh/", TokenRefreshView.as_view()),
-    path("token/varify/", TokenVerifyView.as_view())
+    path("token/varify/", TokenVerifyView.as_view()),
+    #google OAuth
+    path("google/login/", google_login, name="google_login"),
+    path("google/callback/", google_callback, name="google_callback"),
 ]
