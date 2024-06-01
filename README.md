@@ -73,6 +73,10 @@
 </div>
 </details>
 
+<details>
+<summary>8주차</summary>
+<div markdown="1">
+
 ## 8주차 스탠다드 과제 캡쳐본
 ### 1-1. key가 올바르지 않을 때
 ![과제1-1](https://i.postimg.cc/zfgPFHqR/image.png)
@@ -80,3 +84,13 @@
 ![과제1-2](https://i.postimg.cc/RF1sjr6S/image.png)
 ### 2. 작성자가 아닌 사람이 삭제를 할 경우
 ![과제2-1](https://i.postimg.cc/SNnL9FSn/image.png)
+</div>
+</details>
+
+
+## 9주차 스탠다드 과제 캡쳐본
+### 1-1.social user로 등록되지 않은 gmail로 로그인
+![과제 1-1](https://i.postimg.cc/RZm6rdcq/image.png)
+
+### 1-2.social user로 등록된 gmail로 로그인
+![과제 1-2](https://i.postimg.cc/wTgggGGK/image.png)
