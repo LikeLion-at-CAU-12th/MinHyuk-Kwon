@@ -51,6 +51,9 @@ class AuthSerializer(serializers.ModelSerializer):
         else:
             if not user.check_password(raw_password=password):
                 raise serializers.ValidationError("wrong password")
+            # 탈퇴한 유저인지 확인
+            if user.is_deleted == True:
+                raise serializers.ValidationError("withdrawal user")
 
         token = RefreshToken.for_user(user)
         refresh_token = str(token)
@@ -63,6 +66,35 @@ class AuthSerializer(serializers.ModelSerializer):
         }
 
         return data
+
+class DeleteAndRejoinSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(required=True)
+    username = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ["username", "password"]
+    
+    # 유저명과 비밀번호를 제대로 입력했는지 확인!
+    def validate(self, data):
+        username = data.get("username", None)
+        password = data.get("password", None)
+
+        user = User.get_user_or_none_by_username(username = username)
+
+        if user is None:
+            raise serializers.ValidationError("user account not exist")
+        else:
+            if not user.check_password(raw_password=password):
+                raise serializers.ValidationError("wrong password")
+        
+        data = {
+            "user" : user
+        }
+
+        return data
+
+
 
 class OAuthSerializer(serializers.ModelSerializer):
     email = serializers.CharField(required=True)
