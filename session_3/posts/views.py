@@ -283,7 +283,7 @@ class PostList(APIView):
         data = request.data
         data['user'] = request.user.id
         serializer = PostSerializer(data=data)
-        if serializer.is_valid():
+        if serializer.is_valid(data):
             serializer.save();
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
@@ -315,9 +315,24 @@ class PostDetail(APIView):
 # 		post = get_object_or_404(Post, id=id)
 # 		post.delete()
 # 		return Response(status=status.HTTP_204_NO_CONTENT)
+
+from config import S3ImageUploader
+
 class PostList(generics.ListCreateAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer
+
+	def post(self, request, format=None):
+		data = request.data
+		print(data)
+		serializer = PostSerializer(data=data)
+		if serializer.is_valid():
+			image = request.FILES["thumbnail"]
+			url = S3ImageUploader.S3ImageUploader(image).upload()
+			serializer.save(thumbnail = url);
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer

@@ -87,6 +87,9 @@
 </div>
 </details>
 
+<details>
+<summary>9주차</summary>
+<div markdown="1">
 
 ## 9주차 스탠다드 과제 캡쳐본
 ### 1-1.social user로 등록되지 않은 gmail로 로그인
@@ -94,3 +97,11 @@
 
 ### 1-2.social user로 등록된 gmail로 로그인
 ![과제 1-2](https://i.postimg.cc/wTgggGGK/image.png)
+</div>
+</details>
+
+## 10주차 스탠다드 과제 캡쳐본
+### 1-1. png 저장시 에러
+![과제 1-1](https://i.postimg.cc/GtHPWtRy/image.png)
+### 1-2. db에 url 저장
+![과제 1-2](https://i.postimg.cc/L6pRHbhn/image.png)
