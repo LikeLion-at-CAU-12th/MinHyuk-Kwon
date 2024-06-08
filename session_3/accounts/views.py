@@ -66,6 +66,32 @@ class LogoutView(APIView):
         logout(request)
         return Response({"message": "로그아웃되었습니다."}, status=status.HTTP_200_OK)
 
+
+class WithdrawView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        serializers = DeleteAndRejoinSerializer(data = request.data)
+        if serializers.is_valid(raise_exception=True):
+            user = serializers.validated_data["user"]
+            # 이게 model에 작성한 내부 함수를 이용한다는 의도이긴 한데 과제의 의도와 맞는지는 애매....
+            user.soft_delete()
+            return Response({"message" : "탈퇴 완료", "deleted_at : " : user.deleted_at }, status=status.HTTP_200_OK)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RejoinView(APIView):
+    
+    def post(self, request):
+        serializers = DeleteAndRejoinSerializer(data = request.data)
+        # 다시 생각해보니 rejoin은 validation에 is_deleted == True인지 확인하는 부분 + 탈퇴한지 일주일 이내인지 확인이 필요한듯! 그냥 serializer를 분리하자 ㅠㅠ 
+        if serializers.is_valid(raise_exception=True):
+            user = serializers.validated_data["user"]
+            user.rejoin()
+            return Response({"message" : "재가입 완료"}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
         
 from pathlib import Path
 import os, json
