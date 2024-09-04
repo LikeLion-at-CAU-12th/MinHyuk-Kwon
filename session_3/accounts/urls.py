@@ -11,6 +11,9 @@ urlpatterns = [
     path("join/",RegisterView.as_view()),
     path("login/", AuthView.as_view()),
     path("logout/", LogoutView.as_view()),
+    #탈퇴, 재가입
+    path("withdraw/",WithdrawView.as_view()),
+    path("rejoin/",RejoinView.as_view()),
     #토큰
     path("token/", TokenObtainPairView.as_view()),
     path("token/refresh/", TokenRefreshView.as_view()),
